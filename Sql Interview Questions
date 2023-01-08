@@ -1,0 +1,97 @@
+1) Write a query that fetches course-wise maximum marks and places it against each row of the table.
+Query- SELECT s.*, MAX(marks) OVER(PARTITION BY course_id) AS MAX marks from students s;
+
+2) Write a query assigning row numbers to the student table where the windows are sorted using course id and ordered by student id.
+Query- select s.*, ROW_NUMBER() OVER(partition by course_id order by student_id) as row_identifier from students s;
+
+3) Write a query to find the first two enrolled students from each course.
+(We shall assume that the student_id of the first student who joined the company is lesser than those who enrolled later.)
+Query- select * from (select s.*, ROW_NUMBER() OVER(partition by course_id order by student_id) as row_identifier from students s) as a where a.ROW_IDENTIFIER<3;
+
+4) Write a query to find the top 3 students in every course scoring the highest marks.
+Query- select * from (select s.*, RANK() OVER(partition by course_id order by marks desc) as class_rank from students s) as a where a.class_rank<4;
+
+5) Write a query to find the previous salary of an employee under each department.
+Query- select e.*, LAG(salary) OVER(partition by department order by eid) as previous_salary from employees e;
+
+6) Write a query to get distinct rows from a table without making use of the distinct keyword.
+Query- select * from employees e1 where row_id = (select max(row_id) from employees e2 where e1.eid = e2.eid);
+
+7) Create a trigger for insert on Orders table such that, for every insertion of new row in order table, sales field in Salesrep table for that employee should get added with the amount and qty field in Products table for that product should be decreased with the qty.
+Query- create trigger t on orders for insert as update salesreps set Tsales = Tsales + inserted.order_amount from salesreps, inserted where salesreps.empno = inserted.empno update product set Qty = Qty - inserted.Qty from product , inserted where product.pno = inserted.pno
+
+8) Write a trigger that generates employee emails that consist of the first letter of the employee's first name and last name along with “@email.com” when a new record for an employee is inserted in the employee table.
+Query- create trigger t2 on emp for insert as update emp set email = substring(emp.fname,1,1)+ emp.lname+ '@email.com ' from emp, inserted where emp.empno = inserted.empno
+create table emp(empno int, fname varchar(30), lname varchar(30), email varchar(30))
+insert into emp values (100, 'james', 'arthur',null)
+insert into emp values (101, 'sam', 'smith',null)
+select * from emp
+
+9) Write a trigger that changes deptno in the employee table when it changes in the dept table.
+Query- create trigger t5 on department for insert as update emp set deptno = inserted.deptno from emp, inserted where emp.deptno = inserted.deptnono
+
+10) Create a trigger for deletion on the Orders table such that, for every deletion of an old row in the order table, the sales field in the Salesrep table for that employee should get decreased with the amount and the qty field in the Products table for that product should be increased with the qty.
+Query- create trigger t on orders for insert as update salesreps set Tsales = Tsales + deleted.order_amount from salesreps, deleted where salesreps.empno = inserted.empno
+update product set Qty = Qty - deleted.Qty from product , inserted where product.pno = deleted.pno
+
+11) Write a query for a table "data" consisting of columns "name" and "number" to fetch the count rows having same number and name.
+Query- SELECT d.name, d.phone, COUNT('x') OVER (PARTITION BY d.name) AS count FROM data d;
+
+12) Write a query to find the job type whose total salary is greater than the average across all job types.
+Query- WITH total_salary as (select e.job_type, sum(e.salary) as total_sal_per_job from employee e group by e.job_type), avg_salary as (select avg(total_sal_per_job) avg_sal_all_job from total_salary) select * from total_salary join avg_salary on total_salary.total_sal_per_job > avg_salary.avg_sal_all_job;
+
+13) Write an SQL query to find out the eid and name of employees having the same designation as the employee with eid = 213
+Query- SELECT eid, name FROM employees WHERE designation = (SELECT designation FROM employees WHERE employee_id=213);
+
+14) For a table "data" containing columns "name", and "occupation", query all the names immediately followed by the first letter in the occupation column enclosed in parenthesis.
+Query- SELECT CONCAT(name, ’(‘, SUBSTR(occupation, 1, 1), ’)’) FROM data;
+
+15) For a transaction table with the columns transaction_id, user_id, transaction_date, product_id, and quantity, the amount of customers who made multiple purchases on multiple days needs to be investigated (Note: a user can purchase multiple products on a single day).
+Query- SELECT COUNT(user_id) FROM (SELECT user_id FROM orders GROUP BY user_id HAVING COUNT(DISTINCT DAT(date)) > 1) t
+
+16) Find Query to get information of Employee where Employee is not assigned to the department
+Query- select * from employees where dept_id not in(select d_id from department);
+
+17) Write a query to find out the name of each employee who has a dependent with the same first name and is of the same gender as the employee
+Query- select e.first_name, e.last_name from employees as e where eid in (select eid from dependent as d where e.first_name = d.first_name and e.gender = d.gender);
+
+18) For each department that has more than ten employees, retrieve the department number and the number of its employees who are making more than Rs. 1000000.
+Query- select dept_no, count(*) from department, employees where dept_no = d_no and salary > 1000000 and (select d_no from employee group by d_no having count(*) > 10);
+
+19) How can you avoid getting NULL values upon arithmetic calculations on the fields containing NULL values?
+Query- select item, price * (quantity + IFNULL(qty_on_order, 0)) from orders;
+
+20) How to find nth highest salary using DENSE_RANK()?
+Query- With cte as ( select DENSE_RANK() over(partition by dept_id order by salary desc) as r, dept_id,name,salary from employees ) select DepId,Name,Salary from CTE where r=n;
+
+21) Write a query to display age of an employee using the dob column
+Query- select floor((cast (GetDate() as INTEGER) - cast(dob as INTEGER)) / 365.25) as Age from employee;
+
+22) Which operator will you use if you want to display distinct values on the left of the operator that is also not found on the right query of the operator? Give example
+Ans- EXCEPT operator
+Query- select item_id from stock.work_order except select item_id from stock.item ;
+
+23) Given two tables customer and salesperson, find out the customers and salesperson who live in the same city. Display customer name, salesperson name and the city
+Query- select salesperson.name as "salesperson", customer.cust_name, customer.city from salesperson,customer where salesperson.city=customer.city;
+
+24) For tables customer having columns c_id, c_name, city, grade, s_id and salesperson having columns salesp_id, s_name, commission, city, write a query to find out the salespersons who live in a different city than the customers and have received a commission of at least 10% of the company. Display c_name, s_name, cust_city, salesp_city, and commission.
+Query- SELECT c.cust_name as "Customer Name", c.city as "Customer City", s.name as "Salesman Name", s.city as "Salesperson City",s.commission FROM customer c INNER JOIN salesman s ON c.salesman_id=s.salesman_id WHERE s.commission>=.10 AND c.city<>s.city;
+
+25) Write a query to perform multiple inner join between tables student, marks and attendance that have the column studend_id in common.
+Query- select s.student_id, student_name, marks, attendance from students as s inner join marks as m on s.student_id=m.student_id inner join attendance as a on m.student_id=a.student_id;
+
+26) Write a query to perform a left join on students, marks and attandance tables where marks are greater than 85.
+Query- select s.student_id, student_name, marks, attendance
+from students as s left outer join marks as m on s.student_id=m.student_id left join attendance as a on m.student_id=a.student_id where marks>85;
+
+27) Write a query to demonstrate how to use the right outer join on the customers and orders table.
+Query- SELECT customers.c_id, orders.o_id, orders.order_date FROM customers RIGHT OUTER JOIN orders ON customers.c_id = orders.cust_id ORDER BY customers.c_id;
+
+28) For given tables employee(eid, first_name, last_name, dept, salary) and projects (p_name, dept, proj_manager_id, p_budget) find the list of all employees who manage project whilst exceeding the budget of 300000
+Query- select SEmployee.* FROM SEmployee INNER JOIN MProject ON SEmployee.EmpID = MProject.ProjectManagerID AND ProjectBudget > 250000.00;
+
+29) Write a query to find out the department-wise count of employees sorted by department’s count in descending order
+Query- select Department, count(eid) as Emp_Dept_Count from employees GROUP BY department ORDER BY Emp_Dept_Count DESC;
+
+30) For the tables employee and employeePosition, write a query to display all the employees who also act as a manager.
+Query- select e._name, p.emp_position from employeese inner join employeePosition p on e.eid = p.empid and p.emp_position in ('manager');

@@ -1,0 +1,254 @@
+1. How is an RDBMS different from a DBMS?
+Ans. RDBMS i.e. a Relational Database Management System is like an advanced version of a DBMS. An RDBMS differs from a DBMS in the following ways -
+● A DBMS stores data as files whereas in an RDBMS data is stored in tabular format.
+● The data across the tables can be related to each other in an RDBMS however the data stored in a DBMS are not related to one another.
+● You cannot access different elements at the same time in a DBMS however you can access multi-elements simultaneously using an RDBMS.
+● RDBMS supports normalization and distributed databases, unlike a DBMS.
+● An RDBMS deals with a relatively larger quantity of data as compared to a DBMS. Hence, it is used to deal with huge data whereas a DBMS is used for small organizations to store lesser data.
+● Due to the usage of keys and indexes, data redundancy is not an issue in an RDBMS, unlike a DBMS where data redundancy is very common.
+● For large amounts of data, data fetching is slower in DBMS however it is very fast in an RDBMS due to the relational approach.
+● An RDBMS has higher software and hardware requirements as compared to a DBMS.
+
+2. Explain the difference between DDL, DML, and DCL statements
+Ans. DDL stands for Data Definition Language, DML stands for Data Manipulation Language and DCL stands for Data Control Language.
+● DDL is used to define, create, modify and delete the schema of the database or the database objects.CREATE, ALTER, and DROP are examples of DDL commands.
+● DML is used for modifying and manipulating database data. INSERT, UPDATE, and DELETE are examples of DML commands.
+● DCL is used to manage access to the data stored in the database. GRANT and REVOKE are examples of DCL commands.
+
+3. What are constraints?
+Ans. The kind of data that can be entered into a table is restricted by constraints. This guarantees the reliability and accuracy of the data in the table. The action is stopped if there is a contradiction between the constraint and the data action. Both column-level or table-level constraints are possible. Table level restrictions apply to the entire table, while column level constraints just affect the specified column. In SQL, we have NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK, DEFAULT and CREATE INDEX constraints for regulating the data that is entered into a table.
+
+4. Explain the use of primary key and foreign key
+Ans. Every row of a table in a database must have a unique identification, and the primary key is crucial in providing that identifier. The primary key constraint is a combination of not null and unique constraints in SQL. Every row in the database is uniquely identified by a column or group of columns that act as a primary key. On the other hand, a foreign key is utilized to establish a connection between the two tables. To maintain data integrity between two different instances of an entity, the foreign key's primary function is to be used. A field in a table that serves as the primary key in another table is known as a foreign key. There are no restrictions on how we can insert values into the primary key column. In contrast, while entering values into the foreign key table, we must make sure that the value is present in a main key column.There can be only one primary key per table however there can be multiple foreign keys in a table.
+
+5. What is the difference between a primary key and a unique key?
+Ans. Here are some differentiating points between primary key and unique key constraints -
+● To uniquely identify records in a database, every table might have one or more columns acting as a primary key. A unique key, on the other hand, stops two rows from having identical items in a column.
+● In a relational database, a table can have numerous unique keys, but it can only have one primary key.
+● A unique key can have NULL values, however only one NULL is permitted in a table, whereas a main key column cannot have NULL values.
+● Uniqueness is desirable for a primary key, but it doesn't mean that a unique key has to be the primary key.
+● While the unique key enforces unique data, the primary key implements data integrity.
+
+6. What is a cross join?
+Ans. A cross join is a join that gives the Cartesian product of all the rows from both the tables in the join. In other words, each row from the first table and each row from the second table are combined. For example - If table 1 is -
+Letters
+A
+B
+C
+And table 2 is -
+Numbers
+1
+2
+3
+The cross join of both these tables will give us -
+
+Letters Numbers
+A 1
+A 2
+A 3
+B 1
+B 2
+B 3
+C 1
+C 2
+C 3
+
+7. Which command is used to remove duplicates from the result-set obtained by the second SELECT query from the result-set obtained by the first SELECT query and then return the filtered results from the first?
+Ans. The distinct command is used to remove duplicates.
+
+8. What is a cursor?
+Ans. The rows (one or more) that a SQL statement returns are stored in a cursor. You can give a cursor a name so that a program can use it to retrieve and handle the rows returned by the SQL statement one at a time. Two different types of cursors exist - Implicit cursors and Explicit cursors.
+
+9. How do the clustered and non-clustered indexes differ in SQL?
+Ans. An index aids in enhancing both overall performance and speed of data retrieval. If the primary key and unique constraint are defined on the table, the index is automatically constructed. Clustered and non-clustered indexes are two different types of indexes.
+A clustered index on a column is automatically created in SQL Server by the primary key constraint. There can only be one clustered index per table, as specified by the protocol. A clustered index is used, much like a dictionary, to define the order, sort the table, or organize the data in alphabetical order.
+A non-clustered index records data in a different location than where it is collected. Pointers to the location of that data are contained in the index. There can be multiple non-clustered indexes on a table, as specified by the protocol. It does not impact the order of the data stored in the table.
+Further, no extra space is required to store the logical structure of a clustered index whereas extra space is required to store the logical structure of an unclustered index.
+If data retrieval is your priority then clustered index works best whereas if updating data is your priority then non-clustered indexes work best.
+
+10. What is a view? How is it different from a table?
+Ans. A view is nothing but a virtual table. The rows and columns in a view are similar to those in a table. A view is a database object that is built on top of another table (or view), as opposed to a table, which holds data on its own. If data in the underlying table changes, the display will also reflect those changes. A view may be constructed on top of one or more tables. A view can also be defined on top of a different view.
+
+11. Explain the different forms of normalization. What is the use of normalization?
+Ans. Redundancy from a relation or group of relations is minimized through the process of normalization. Insertion, deletion, and update abnormalities could result from relational redundancy. Redundancy in database tables can be reduced with the help of normal forms. The different forms of normalization are explained as follows -
+a. First Normal Form – A relation violates the first normal form if it has composite or multi-valued attributes, or it is in the first normal form if neither of these attributes is present. If all of the attributes in a relation are singled valued attributes, the connection is said to be in the first normal form.
+b. Second Normal Form – A relation must be in the first normal form and be devoid of any partial dependencies in order to be in the second normal form. If a relation has No Partial Dependency, which means that no non-prime attribute—i.e., an attribute that is not included in any candidate key—is dependent on any suitable subset of any candidate key in the table, then the relation is in 2NF.
+c. Third Normal Form – A relation is in the third normal form if it is both in the second normal form and there is no transitive dependency for non-prime characteristics. If at least one of the following applies to every non-trivial function dependence X -> Y, a relation is in 3NF - Super key X is used or the prime attribute is Y.
+d. Boyce-Codd Normal Form (BCNF) – If a relation R is in Third Normal Form for every FD, it is said to be in BCNF. The LHS acts as the super key. A relation is in the BCNF if X is a super key in every non-trivial functional dependency X -> Y
+
+12. Explain how TRUNCATE, DELETE and DROP statements differ from one another
+Ans.
+● TRUNCATE in SQL is a DDL command. It is used to eliminate every record from a table. An existing table's records are deleted, but the table itself is left intact. The table's schema or structure is maintained. As a DDL command, the TRUNCATE TABLE statement cannot be undone i.e. it cannot be rolled back.
+● DELETE in SQL is a DML command. It is used to remove current records from a table that already exists. Depending on the query's criterion, we can delete a single record or a number of records. Since DELETE is a DML command, it can be undone i.e. it can be rolled back.
+● DROP is a DDL Command. Existing database objects can be deleted using the DROP statement. You can use it to remove databases, tables, views, triggers, and other objects. The deletion of an object with the DROP command cannot be undone i.e. rolled back and is irreversible.
+● Prior to deletion, the DELETE statement checks every row. As a result, it takes longer than the TRUNCATE command. Using TRUNCATE instead of DELETE when deleting all the records from a table is recommended because it is quicker. The DROP command eliminates the entire schema/structure of the table from the database, in contrast, to TRUNCATE which simply deletes the data of the tables.
+
+13. What are Scalar functions?
+Ans. There are some built-in functions in SQL that are known as scalar functions, and no matter what input is passed to a scalar function, it will always return a single value as its output. In SQL, the scalar functions treat each record separately. Scalar functions are often used and include the following: UCASE(), LCASE(), MID(), LENGTH(), ROUND(), NOW(), FORMAT()
+
+14. What are aggregate functions in SQL?
+Ans. A column's multiple values are calculated by an aggregate function in SQL, which in turn produces a single value. The GROUP BY and HAVING clauses in a SELECT statement frequently go hand in hand with aggregate functions. Avg, count, sum, min, max, and many other aggregate methods are available in SQL. With the exception of the count function, an aggregate function does not take into account NULL values while calculating results.
+
+15. What are OLAP and OLTP?
+Ans. Data analysis for business choices is done using a class of software tools known as online analytical processing (OLAP). OLAP offers a setting where users can simultaneously access insights from the database gathered from several database systems. Examples: An OLAP system is any type of data warehousing system. In a three-tier design, online transaction processing (OLTP) offers transaction-oriented applications. The daily operations of an organization are managed by OLTP. The use of OLTP is possible for online banking, sending text messages, and adding clothes to shopping carts.
+
+16. What do we use for pattern matching in SQL?
+Ans. We use wildcard characters for pattern matching in SQL.
+
+17. Explain triggers in SQL
+Ans. A trigger is a specific kind of stored procedure that launches automatically whenever a database server event takes place. When a user attempts to edit data using a data manipulation language (DML) event, DML triggers are activated. DML operations are statements that INSERT, UPDATE, or DELETE data from a table or view. Whether or whether table rows are affected, these triggers are triggered whenever a legitimate event occurs.
+
+18. Is a NULL value equivalent to a blank space or zero?
+Ans. No, a NULL value is not equivalent to a black space or zero. Any value that is "unavailable, unassigned, unknown, or not applicable" is referred to as a NULL value. Whereas, a blank space is a character and zero is a number.
+
+19. What is the use of the COALESCE function?
+Ans. The COALESCE function is used to return the very first value from a series that is NOT NULL. It evaluates the expressions in the order and returns the first value which is not null.
+
+20. Explain the difference between where and having clauses?
+Ans. Similar to a WHERE clause, a HAVING clause only applies to groups as a whole (i.e., to the rows in the result set that represent groups), but a WHERE clause applies to specific rows. Both a WHERE clause and a HAVING clause may be present in a query. If so, then -
+● Individual rows in the tables are the first to get the WHERE clause's application. The rows that meet the WHERE clause's criteria are grouped together as a result set.
+● The rows in the result set are then subjected to the HAVING clause. The query output only contains the groups that satisfy the HAVING requirements.
+
+21. Explain character manipulation functions in SQL
+Ans. A function that accepts one or more characters or numbers as input and outputs a character value is known as a character manipulation function. A string value is returned as a result set from basic string functions, which have a number of features. Here are the SQL character functions:
+● To lowercase all the characters in a string, use the SQL LOWER() method.
+● Using the SQL UPPER() method, all characters in a string are changed to uppercase.
+● The SQL TRIM() function eliminates leading and trailing characters from character strings, or both.
+● The SQL TRANSLATE() method swaps out one string's set of characters for another string. A single character is replaced at a time using the function.
+
+Query-based questions
+
+22. How can we display the current date in SQL?
+Query- SELECT GETDATE();
+
+23. How can we display alternate records from a table?
+Query- SELECT * FROM table_name WHERE column_name%2 = 1;
+
+24. How can you find the second highest salary from the given employee table?
+Query- SELECT MAX(emp_salary) FROM Employee WHERE SALARY < (SELECT MAX(emp_salary) FROM Employee);
+
+25. How can we copy the entire data from one table to another in SQL?
+Query- INSERT INTO new_table SELECT * FROM old_table;
+
+26. How can we create an empty table with the same structure as another table?
+Query- CREATE TABLE new_table LIKE oldl_table;
+
+27. For the given table structure -
+
+1. Display the details of authors who have published a maximum no of books
+Query- select COUNT(authorname) as No_of_books, authorname from book group by authorname having COUNT(authorname)=(select MAX(No_of_books) from (select COUNT(authorname) as No_of_books, authorname from book group by authorname)y)
+
+2. Display the details of students who have taken the book ‘Linear Programming’
+Query- select s.* from student s, book b, studentbook sb where s.uidno=sb.uidno and b.ISBN=sb.ISBN and b.bookname='Linear programming'
+
+3. Display the details of the department with the maximum number of students
+Query- select d.dname, count(*) from department as d, student as s where d.deptno=s.deptno group by d.dname having COUNT(*)=(select max(no) from (select COUNT(*) as no, d.dname from department d, student s where d.deptno=s.deptno group by dname)y)
+
+4. Display sname, department name, author_name, date of issue, and book name of all the books which were issued in November 2019
+Query- select s.studentname,d.dname,b.authorname,b.bookname,sb.DOE from student s, department d,book b, studentbook sb where s.uidno=sb.uidno and s.deptno=d.deptno and sb.uidno=s.uidno and b.ISBN=sb.ISBN and year(sb.DOE)='2019' and month(sb.DOE)='11'
+
+5. Create a view to display book_name, authors_name and publishers _name of all the books.
+Query- create view DetailsView as select bookname, authorname, publisher FROM book
+
+6. Display the details of students who have not yet returned the book.
+Query- select s.* from student as s, studentbook as sb where s.uidno=sb.uidno and sb.DOR is null
+
+7. Display the details of authors who have written more than 1 books
+Query- select count(authorname) as c, authorname from book group by authorname having COUNT(authorname)>1
+
+8. Find the number of students studying in each class
+Query- select count(*) as Students, c.coursename from student s, course c where s.courseno=c.courseno group by c.coursename
+
+28. For the given table structure
+
+
+1. Display the details of the department that has more than one faculty (using exist operator)
+Query- select * from faculty where exists(select deptno from dept ) select deptno, count(*) 'Number of faculty' from faculty group by deptno having count(*)>1
+
+2. Display the name of all the books borrowed by faculty or students in the year 2018
+Query- select distinct(isbn_no) from faculty_book where year(doe)=2018 union (select isbn_no from student_book where year(doe)=2018)
+Or
+select distinct(b.isbn_no) from book b,faculty_book fb,student_book sb where fb.isbn_no=b.isbn_no and sb.isbn_no=b.isbn_no and year(sb.doe)=2018 or year(fb.doe)=2018
+
+3. Display the details of the books published by alpha publishers and written by Benjamin and borrowed by at least one student.
+Query- select sb.isbn_no from book b,publisher p,student_book sb,author a,book_author ba where b.pub_no=p.pub_no and b.isbn_no=sb.isbn_no and b.isbn_no=ba.isbn_no and ba.auth_no=a.auth_no and a.fname='Leo Tolstoy' and p.pname='Penguin Random House India' group by sb.isbn_no having count(*)>1
+
+4. Find the designation in which the maximum number of employees are appointed and the sum of their salary is more than one crore.
+Query- select designation,count(*)'No of employees' from faculty group by designation having count(*)>= all(select count(*) from faculty group by designation having sum(salary)>10000000)
+
+5. Display the details of the students and faculties who have taken the book ‘Database system concepts’
+Query- select * from student where uidno in(select uidno from student_book sb, book b where b.bname='Database system concepts' and sb.isbn_no=b.isbn_no)
+
+6. Display the details of the faculties whose salary is greater than the average salary of their department.
+Query- select * from faculty f1 where salary>(select avg(salary) from faculty f2 where f1.deptno=f2.deptno)
+
+7. Display the details of the books that have a co-author.
+Query- select * from book where isbn_no IN (select isbn_no from book_author group by isbn_no having count(*)>1)
+
+8. Find the details of the books which were issued maximum number of times.
+Query- (select isbn_no,count(*)'Number of times' from student_book group by isbn_no having count(*)>=all(select count(*) from student_book group by isbn_no))
+
+29. For the given table structure -
+
+Find out -
+
+1. List all orders showing order number, amount, customer name, and the customer’s credit limit.
+Query- select o.order_num, o.amount, c.company, c.credit_limit from orders o, customers c where o.cust = c.cust_num
+
+2. List orders over 50000, including the names of the salesperson who took the order and the name of the customer who placed it, and the office where the salesperson works.
+Query- select o.amount, c.company, s.name, office.office, office.city from orders o, customers c, salesreps s, offices office where o.amount> 50000 and o.cust = c.cust_num and o.rep = s.empno and s.rep_office = office.office
+
+3. List the salespeople who work in different offices than their manager, showing the name and office where each works.
+Query- select s.name, s.rep_office, m.name as 'manager', m.rep_office from salesreps s, salesreps m where s.manager = m.empno and s.rep_office != m.rep_office
+
+4. List the offices and their target where all salespeople have sales exceeding 50 percent of the office’s target.
+Query- select o.office, o.city, o.target from offices o where 0.5*o.target < (select sum(sales) from salesreps where salesreps.rep_office = o.office )
+
+5. List salespeople with a higher quota than their managers.
+Query- select s.name, s.quota as 'employee quota',m.name, m.quota as 'manager quota' from salesreps s, salesreps m where s.manager = m.empno and s.quota > m.quota
+
+6. List all combinations of salespeople and offices where the salespersons quota is more than the office target
+Query- select s.*,o.office from Salesrep s,Offices o where s.rep_office=o.office and s.quota>o.target
+
+7. List the product for which there exists at least one order in the orders table that has an amount of at least Rs.25000/.
+Query- select p.* from products p where exists (select o.amount from orders o where o.product = p.product_id and o.mfr = p.mfr_id and o.amount > 25000)
+
+8. Find all orders received on days when a new salesperson was hired.
+Query- select orders.*, salesreps.hire_date from salesreps, orders where salesreps.hire_date = orders.order_date
+
+30. For a given table employee containing columns eid, name, email, and contact how will you add email validation?
+Query- select * from employee where email LIKE '%@gmail.com';
+
+31. Write a query to calculate the even records from a table.
+Query- select * from tablename where (rowid % 2) = 0 (assuming that you have autonumbered the rowid column)
+
+32. Write a query to display 50% records of the employee table
+Query- select * from employee where eid <= (select count(eid)/2 from employee);
+
+33. Suppose you have a table student_details with columns - student_id, firstname, lastname. Create a clustered index on student_id and a nonclustered index on lastname
+Query- create clustered index cl_eid on employee(eid);
+create nonclustered index ncl_name on employee(ename);
+
+34. How would you retrieve common records from two tables ?
+Query- select column_name from table1 intersect select column-name from table2;
+
+35. Write a query to find out student details of students whose total_marks lie between 70 and 90
+Query- select * from student_details where total_marks between 70 and 90;
+
+36. What does an arithmetic operation involving NULL return?
+Ans. An arithmetic operation involving NULL returns NULL itself. Eg: NULL - NULL = NULL and not 0.
+
+37. Create a table student_details consisting of auto increment feature on the student_id column.
+Query- create table student_details( student_id int not null identity(1, 1), first_name varchar(50), last_name varchar(50) );
+insert into student_details(first_name, last_name) values ('jeff', 'bezos');
+insert into student_details(first_name, last_name) values ('bill', 'gates');
+
+38. What is the SQL query for listing all the views?
+Create- select table_schema, table_name from information_schema.views;
+
+39. What would be the query to find the names of the employees whose name starts with ‘K’?
+Query- select * from employee where ename like 'k%';
+
+40. What is the SQL query for listing all the students who have taken a subject other than Applied Mathematics?
+Query- select student_id from student_details where not subject='Applied Mathematics';
+
